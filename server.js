@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 const bodyParser = require("body-parser");
 const routes = require("./routes");
+const axios = require("axios");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -21,7 +22,7 @@ mongoose.Promise = Promise;
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/nytreact");
 
-app.post("/nyt/:query", ((req, res) => {
+app.post("nyt/:query", ((req, res) => {
   axios.get(process.env.BASEURL + process.env.APIKEY + req.params.query)
     .then(response =>{
       
